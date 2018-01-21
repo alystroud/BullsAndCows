@@ -12,21 +12,16 @@
 using namespace std;
 
 void PrintIntro();
+void PlayGame();
 string GetGuess();
+bool AskToPlayAgain();
 
 //Entry point for application
 int main(int argc, const char * argv[]) {
     
     PrintIntro();
-    
-    constexpr int NUM_OF_TURNS = 5;
-    for(int i = 0; i < NUM_OF_TURNS; i++)
-    {
-        string Guess = GetGuess();
-        //repeat the guess back to them
-        cout << "Your guess: " << Guess << endl;
-        cout << endl;
-    }
+    PlayGame();
+    cout << AskToPlayAgain() << endl;
     
     return 0;
 }
@@ -41,6 +36,18 @@ void PrintIntro()
     return;
 }
 
+void PlayGame()
+{
+    constexpr int NUM_OF_TURNS = 5;
+    for(int i = 0; i < NUM_OF_TURNS; i++)
+    {
+        string Guess = GetGuess();
+        //repeat the guess back to them
+        cout << "Your guess: " << Guess << endl;
+        cout << endl;
+    }
+}
+
 string GetGuess()
 {
     //get a guess from the player
@@ -48,4 +55,16 @@ string GetGuess()
     string Guess = "";
     getline(cin, Guess);
     return Guess;
+}
+
+bool AskToPlayAgain()
+{
+    cout << "Do you want to play again? ";
+    string Response = "";
+    getline(cin, Response);
+    if(Response[0] == 'y')
+    {
+        return true;
+    }
+    return false;
 }
