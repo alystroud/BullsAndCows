@@ -19,9 +19,12 @@ bool AskToPlayAgain();
 //Entry point for application
 int main(int argc, const char * argv[]) {
     
-    PrintIntro();
-    PlayGame();
-    cout << AskToPlayAgain() << endl;
+    do
+    {
+        PrintIntro();
+        PlayGame();
+        
+    } while(AskToPlayAgain());
     
     return 0;
 }
@@ -59,12 +62,9 @@ string GetGuess()
 
 bool AskToPlayAgain()
 {
-    cout << "Do you want to play again? ";
+    cout << "Do you want to play again (y/n)? ";
     string Response = "";
     getline(cin, Response);
-    if(Response[0] == 'y')
-    {
-        return true;
-    }
-    return false;
+    cout << endl;
+    return (Response[0] == 'y' || Response[0] == 'Y');
 }
