@@ -29,12 +29,13 @@ public:
     int32 GetMaxTries() const;
     int32 GetCurrentTry() const;
     bool IsGameWon() const;
-    bool CheckStringValidity(FString);
+    int32 GetHiddenWordLength() const;
+    bool CheckStringValidity(FString) const;
     BullCowCount SubmitGuess(FString);
     
 private:
     int32 CurrentTry;
     int32 MaxTries;
-    bool IsIsogram(FString);
+    FString HiddenWord;
 };
 #endif /* FBullCowGame_hpp */
