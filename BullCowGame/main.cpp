@@ -46,10 +46,10 @@ void PlayGame()
 {
     BCGame.Reset();
     //TODO: Change this to while loop
-    while(BCGame.GetMaxTries() >= BCGame.GetCurrentTry())
+    while(BCGame.GetMaxTries() >= BCGame.GetCurrentTry() && !BCGame.IsGameWon())
     {
         FText Guess = GetValidGuess(); //TODO: Make loop checking valid
-        BullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+        BullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
         
         //Print number of bulls and cows
         std::cout << "Bulls = " << BullCowCount.Bulls;

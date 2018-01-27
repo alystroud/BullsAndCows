@@ -8,8 +8,6 @@
 
 #include "FBullCowGame.hpp"
 
-bool FBullCowGame::IsGameWon() const { return false; }
-
 int32 FBullCowGame::GetMaxTries() const { return MaxTries; }
 
 int32 FBullCowGame::GetCurrentTry() const { return CurrentTry; }
@@ -20,6 +18,8 @@ FBullCowGame::FBullCowGame()
 {
     Reset();
 }
+
+bool FBullCowGame::IsGameWon() const { return bGameWon; }
 
 void FBullCowGame::Reset()
 {
@@ -54,7 +54,7 @@ EWordStatus FBullCowGame::CheckStringValidity(FString Guess) const
 
 //Receives valid guess, increments current try
 //Returns count
-BullCowCount FBullCowGame::SubmitGuess(FString Guess)
+BullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
     CurrentTry++;
     BullCowCount Count;
@@ -73,6 +73,9 @@ BullCowCount FBullCowGame::SubmitGuess(FString Guess)
                 }
             }
         }
+    }
+    if(Count.Bulls == HiddenWord.length()){
+        bGameWon = true;
     }
     return Count;
 }

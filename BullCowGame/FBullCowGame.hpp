@@ -39,11 +39,12 @@ public:
     bool IsGameWon() const;
     int32 GetHiddenWordLength() const;
     EWordStatus CheckStringValidity(FString) const;
-    BullCowCount SubmitGuess(FString);
+    BullCowCount SubmitValidGuess(FString);
     
 private:
     int32 CurrentTry;
     int32 MaxTries;
     FString HiddenWord;
+    bool bGameWon = false;
 };
 #endif /* FBullCowGame_hpp */
