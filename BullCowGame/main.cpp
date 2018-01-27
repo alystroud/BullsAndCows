@@ -8,12 +8,14 @@
 
 #include <iostream>
 #include <string>
-
+#include "FBullCowGame.hpp"
 
 void PrintIntro();
 void PlayGame();
 std::string GetGuess();
 bool AskToPlayAgain();
+
+FBullCowGame BCGame;
 
 //Entry point for application
 int main(int argc, const char * argv[]) {
@@ -40,6 +42,9 @@ void PrintIntro()
 
 void PlayGame()
 {
+    
+    int MaxTries = BCGame.GetMaxTries();
+    std::cout << "Max Tries: " << MaxTries << std::endl;
     constexpr int NUM_OF_TURNS = 5;
     for(int i = 0; i < NUM_OF_TURNS; i++)
     {
@@ -53,7 +58,7 @@ void PlayGame()
 std::string GetGuess()
 {
     //get a guess from the player
-    std::cout << "Enter your guess: ";
+    std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
     std::string Guess = "";
     getline(std::cin, Guess);
     return Guess;

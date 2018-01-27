@@ -19,17 +19,10 @@ bool FBullCowGame::CheckStringValidity(std::string) {
 }
 
 
-bool FBullCowGame::IsGameWon() { 
-    return false;
-}
+bool FBullCowGame::IsGameWon() const { return false; }
 
+int FBullCowGame::GetMaxTries() const { return MaxTries; }
 
-int FBullCowGame::GetMaxTries() { 
-    return 0;
-}
-
-int FBullCowGame::GetCurrentTry() { 
-    return 0;
-}
+int FBullCowGame::GetCurrentTry() const { return CurrentTry; }
 
 
