@@ -29,6 +29,7 @@ void FBullCowGame::Reset()
     MaxTries = MAX_TRIES;
     CurrentTry = 1;
     HiddenWord = HIDDEN_WORD;
+    bGameWon = false;
     return;
 }
 
@@ -74,8 +75,13 @@ BullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
             }
         }
     }
-    if(Count.Bulls == HiddenWord.length()){
+    if(Count.Bulls == HiddenWord.length())
+    {
         bGameWon = true;
+    }
+    else
+    {
+        bGameWon = false;
     }
     return Count;
 }

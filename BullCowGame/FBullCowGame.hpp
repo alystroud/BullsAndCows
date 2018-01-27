@@ -33,18 +33,20 @@ class FBullCowGame
 {
 public:
     FBullCowGame(); //Constructor 
-    void Reset(); //TODO make a more rich return value
+
     int32 GetMaxTries() const;
     int32 GetCurrentTry() const;
     bool IsGameWon() const;
     int32 GetHiddenWordLength() const;
     EWordStatus CheckStringValidity(FString) const;
+    
+    void Reset(); //TODO make a more rich return value
     BullCowCount SubmitValidGuess(FString);
     
 private:
     int32 CurrentTry;
     int32 MaxTries;
     FString HiddenWord;
-    bool bGameWon = false;
+    bool bGameWon;
 };
 #endif /* FBullCowGame_hpp */
