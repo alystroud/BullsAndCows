@@ -12,18 +12,29 @@
 #include <iostream>
 #include <string>
 
+using FString = std::string;
+using int32 = int;
 
-class FBullCowGame {
+struct BullCowCount
+{
+    int32 Bulls = 0;
+    int32 Cows = 0;
+};
+
+class FBullCowGame
+{
 public:
+    FBullCowGame(); //Constructor 
     void Reset(); //TODO make a more rich return value
-    int GetMaxTries() const;
-    int GetCurrentTry() const;
+    int32 GetMaxTries() const;
+    int32 GetCurrentTry() const;
     bool IsGameWon() const;
-    bool CheckStringValidity(std::string);
+    bool CheckStringValidity(FString);
+    BullCowCount SubmitGuess(FString);
     
 private:
-    int CurrentTry = 1;
-    int MaxTries = 5;
-    bool IsIsogram(std::string);
+    int32 CurrentTry;
+    int32 MaxTries;
+    bool IsIsogram(FString);
 };
 #endif /* FBullCowGame_hpp */

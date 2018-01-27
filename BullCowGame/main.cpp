@@ -10,15 +10,18 @@
 #include <string>
 #include "FBullCowGame.hpp"
 
+using FText = std::string;
+using int32 = int;
+
 void PrintIntro();
 void PlayGame();
-std::string GetGuess();
+FText GetGuess();
 bool AskToPlayAgain();
 
 FBullCowGame BCGame;
 
 //Entry point for application
-int main(int argc, const char * argv[]) {
+int main(int32 argc, const char * argv[]) {
     
     do
     {
@@ -33,7 +36,7 @@ int main(int argc, const char * argv[]) {
 void PrintIntro()
 {
     //introduce the game
-    constexpr int WORD_LENGTH = 5;
+    constexpr int32 WORD_LENGTH = 5;
     std::cout << "Welcome to Bulls and Cows, a fun word game" << std::endl;
     std::cout << "Can you guess the " << WORD_LENGTH << " letter isogram that I'm thinking of?" << std::endl;
     std::cout << std::endl;
@@ -42,24 +45,26 @@ void PrintIntro()
 
 void PlayGame()
 {
-    
-    int MaxTries = BCGame.GetMaxTries();
-    std::cout << "Max Tries: " << MaxTries << std::endl;
-    constexpr int NUM_OF_TURNS = 5;
-    for(int i = 0; i < NUM_OF_TURNS; i++)
+    BCGame.Reset();
+    int32 MaxTries = BCGame.GetMaxTries();
+    //TODO: Change this to while loop
+    for(int32 i = 0; i < MaxTries; i++)
     {
-        std::string Guess = GetGuess();
-        //repeat the guess back to them
+        FText Guess = GetGuess(); //TODO: Make loop checking valid
+        
+        //Submit valid game to game
+        //Print number of bulls and cows
         std::cout << "Your guess: " << Guess << std::endl;
         std::cout << std::endl;
     }
+    //TODO: Summarise Game
 }
 
-std::string GetGuess()
+FText GetGuess()
 {
     //get a guess from the player
     std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
-    std::string Guess = "";
+    FText Guess = "";
     getline(std::cin, Guess);
     return Guess;
 }
@@ -67,7 +72,7 @@ std::string GetGuess()
 bool AskToPlayAgain()
 {
     std::cout << "Do you want to play again (y/n)? ";
-    std::string Response = "";
+    FText Response = "";
     getline(std::cin, Response);
     std::cout << std::endl;
     return (Response[0] == 'y' || Response[0] == 'Y');
