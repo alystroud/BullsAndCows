@@ -15,7 +15,7 @@ using int32 = int;
 
 void PrintIntro();
 void PlayGame();
-FText GetGuess();
+FText GetValidGuess();
 bool AskToPlayAgain();
 
 FBullCowGame BCGame;
@@ -45,30 +45,45 @@ void PrintIntro()
 void PlayGame()
 {
     BCGame.Reset();
-    int32 MaxTries = BCGame.GetMaxTries();
     //TODO: Change this to while loop
-    for(int32 i = 0; i < MaxTries; i++)
+    while(BCGame.GetMaxTries() >= BCGame.GetCurrentTry())
     {
-        FText Guess = GetGuess(); //TODO: Make loop checking valid
-        
-        //Submit valid game to game
+        FText Guess = GetValidGuess(); //TODO: Make loop checking valid
         BullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
         
         //Print number of bulls and cows
         std::cout << "Bulls = " << BullCowCount.Bulls;
         std::cout << " Cows = " << BullCowCount.Cows << std::endl;
         std::cout << std::endl;
-        
+
     }
     //TODO: Summarise Game
 }
 
-FText GetGuess()
+//TODO:: Change to get valid guess
+FText GetValidGuess()
 {
-    //get a guess from the player
-    std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
+    EWordStatus Status = EWordStatus::INVALID;
     FText Guess = "";
-    getline(std::cin, Guess);
+    do {
+        //get a guess from the player
+        std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
+        getline(std::cin, Guess);
+        Status = BCGame.CheckStringValidity(Guess);
+        switch(Status){
+            case EWordStatus::NOT_LOWER_CASE:
+                std::cout << "Please enter the word in lower case" << std::endl << std::endl;
+                break;
+            case EWordStatus::WRONG_LENGTH:
+                std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word." << std::endl << std::endl;
+                break;
+            case EWordStatus::NOT_ISOGRAM:
+                std::cout << "That is not an isogram. Please enter a word without repeating letters." << std::endl << std::endl;
+                break;
+            default:
+                break;
+        }
+    }while(Status != EWordStatus::OK);
     return Guess;
 }
 

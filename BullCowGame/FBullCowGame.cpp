@@ -23,18 +23,33 @@ FBullCowGame::FBullCowGame()
 
 void FBullCowGame::Reset()
 {
+    const FString HIDDEN_WORD = "plane";
     constexpr int32 MAX_TRIES = 5;
+    
     MaxTries = MAX_TRIES;
     CurrentTry = 1;
-    
-    const FString HIDDEN_WORD = "plane";
     HiddenWord = HIDDEN_WORD;
     return;
 }
 
-bool FBullCowGame::CheckStringValidity(FString) const
+EWordStatus FBullCowGame::CheckStringValidity(FString Guess) const
 {
-    return false;
+    //if it isn't an isogram
+    if(false)
+    {
+        return EWordStatus::NOT_ISOGRAM;
+    }
+    //if isnt all lowercase
+    if(false)
+    {
+        return EWordStatus::NOT_LOWER_CASE;
+    }
+    //if wrong length guess
+    if(Guess.length() != GetHiddenWordLength())
+    {
+        return EWordStatus::WRONG_LENGTH;
+    }
+    return EWordStatus::OK;
 }
 
 //Receives valid guess, increments current try
