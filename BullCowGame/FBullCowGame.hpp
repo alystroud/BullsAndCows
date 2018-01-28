@@ -42,6 +42,7 @@ public:
     
     void Reset(); //TODO make a more rich return value
     BullCowCount SubmitValidGuess(FString);
+    bool IsIsogram(FString) const;
     
 private:
     int32 CurrentTry;

@@ -7,6 +7,8 @@
 //
 
 #include "FBullCowGame.hpp"
+#include <map>
+#define TMap std::map
 
 int32 FBullCowGame::GetMaxTries() const { return MaxTries; }
 
@@ -36,7 +38,7 @@ void FBullCowGame::Reset()
 EWordStatus FBullCowGame::CheckStringValidity(FString Guess) const
 {
     //if it isn't an isogram
-    if(false)
+    if(!IsIsogram(Guess))
     {
         return EWordStatus::NOT_ISOGRAM;
     }
@@ -51,6 +53,11 @@ EWordStatus FBullCowGame::CheckStringValidity(FString Guess) const
         return EWordStatus::WRONG_LENGTH;
     }
     return EWordStatus::OK;
+}
+
+bool FBullCowGame::IsIsogram(FString Guess) const
+{
+    return true;
 }
 
 //Receives valid guess, increments current try
