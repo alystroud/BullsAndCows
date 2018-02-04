@@ -55,8 +55,21 @@ EWordStatus FBullCowGame::CheckStringValidity(FString Guess) const
     return EWordStatus::OK;
 }
 
-bool FBullCowGame::IsIsogram(FString Guess) const
+bool FBullCowGame::IsIsogram(FString Word) const
 {
+    if(Word.length() <= 1){
+        return true;
+    }
+    TMap<char, bool> LettersSeen;
+    for(auto c : Word){
+        c = tolower(c);
+        if(!LettersSeen[c]){
+            LettersSeen[c] = true;
+        }
+        else {
+            return false;
+        }
+    }
     return true;
 }
 
