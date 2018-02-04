@@ -43,6 +43,7 @@ public:
     void Reset(); //TODO make a more rich return value
     BullCowCount SubmitValidGuess(FString);
     bool IsIsogram(FString) const;
+    bool IsLowerCase(FString) const;
     
 private:
     int32 CurrentTry;

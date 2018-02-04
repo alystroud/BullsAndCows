@@ -43,7 +43,7 @@ EWordStatus FBullCowGame::CheckStringValidity(FString Guess) const
         return EWordStatus::NOT_ISOGRAM;
     }
     //if isnt all lowercase
-    if(false)
+    if(!IsLowerCase(Guess))
     {
         return EWordStatus::NOT_LOWER_CASE;
     }
@@ -67,6 +67,20 @@ bool FBullCowGame::IsIsogram(FString Word) const
             LettersSeen[c] = true;
         }
         else {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool FBullCowGame::IsLowerCase(FString Word) const
+{
+    if(Word.length() <= 1){
+        return true;
+    }
+    
+    for(char c : Word){
+        if(!islower(c)){
             return false;
         }
     }
