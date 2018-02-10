@@ -10,7 +10,7 @@
 #include <map>
 #define TMap std::map
 
-int32 FBullCowGame::GetMaxTries() const { return MaxTries; }
+
 
 int32 FBullCowGame::GetCurrentTry() const { return CurrentTry; }
 
@@ -23,12 +23,16 @@ FBullCowGame::FBullCowGame()
 
 bool FBullCowGame::IsGameWon() const { return bGameWon; }
 
+int32 FBullCowGame::GetMaxTries() const
+{
+    TMap<int32, int32> WordLengthToMaxTries {{3, 4}, {4, 7}, {5, 10}, {6, 15}, {7, 20}};
+    return WordLengthToMaxTries[GetHiddenWordLength()];
+}
+
 void FBullCowGame::Reset()
 {
     const FString HIDDEN_WORD = "plane";
-    constexpr int32 MAX_TRIES = 5;
     
-    MaxTries = MAX_TRIES;
     CurrentTry = 1;
     HiddenWord = HIDDEN_WORD;
     bGameWon = false;
